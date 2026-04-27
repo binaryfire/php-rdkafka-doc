@@ -4,7 +4,7 @@ This is the documentation repository for [php-rdkafka](https://github.com/arnaud
 
 ## Reading documentation
 
-The documentation can be read at https://arnaud-lb.github.io/php-rdkafka/phpdoc/
+The documentation can be read at https://php-rdkafka.github.io/php-rdkafka-doc/phpdoc/
 
 ## Building documentation
 
