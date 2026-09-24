@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ -->
+
+<refentry xml:id="rdkafka-message.getheaderpairs" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <refnamediv>
+  <refname>RdKafka\Message::getHeaderPairs</refname>
+  <refpurpose>Get the message headers in their original order</refpurpose>
+ </refnamediv>
+
+ <refsect1 role="description">
+  &reftitle.description;
+  <methodsynopsis>
+   <modifier>public</modifier> <type>array</type><methodname>RdKafka\Message::getHeaderPairs</methodname>
+   <void />
+  </methodsynopsis>
+  <para>
+   Returns every header of the message as a <literal>[name, value]</literal> pair, in the order they appear in the message. Unlike <link linkend="rdkafka-message.props.headers">RdKafka\Message::$headers</link>, repeated names are kept and headers without a value have a &null; value.
+  </para>
+  <para>
+   Header names are returned up to their first null byte, because librdkafka does not return the length of header names.
+  </para>
+  <para>
+   For messages returned by the extension, the pairs are the message's original headers, even if <link linkend="rdkafka-message.props.headers">RdKafka\Message::$headers</link> is changed later. For a message that was created in PHP, or serialized by an earlier version, the pairs are built from the current <link linkend="rdkafka-message.props.headers">RdKafka\Message::$headers</link>, with values converted to strings.
+  </para>
+ </refsect1>
+
+ <refsect1 role="parameters">
+  &reftitle.parameters;
+  &no.function.parameters;
+ </refsect1>
+
+ <refsect1 role="returnvalues">
+  &reftitle.returnvalues;
+  <para>
+   Returns a list of pairs. Each pair is an array holding the header name as a <type>string</type> and its value as a <type>string</type> or &null;.
+  </para>
+ </refsect1>
+
+ <refsect1 role="examples">
+  &reftitle.examples;
+  <example>
+   <title><function>RdKafka\Message::getHeaderPairs</function> example</title>
+   <programlisting role="php">
+<![CDATA[
+<?php
+foreach ($message->getHeaderPairs() as [$name, $value]) {
+    if ($value === null) {
+        echo "$name has no value\n";
+    } else {
+        echo "$name: $value\n";
+    }
+}
+?>
+]]>
+   </programlisting>
+  </example>
+ </refsect1>
+
+ <refsect1 role="seealso">
+  &reftitle.seealso;
+  <para>
+   <simplelist>
+    <member><function>RdKafka\ProducerTopic::producev</function></member>
+   </simplelist>
+  </para>
+ </refsect1>
+
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+indent-tabs-mode:nil
+sgml-parent-document:nil
+sgml-default-dtd-file:"~/.phpdoc/manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
