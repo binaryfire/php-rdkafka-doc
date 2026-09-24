@@ -7,10 +7,7 @@
  <section xml:id="rdkafka.requirements">
   &reftitle.required;
   <para>
-   The extension support both PHP 7 and PHP 8.
-  </para>
-  <para>
-   The extension requires <link xlink:href="https://github.com/edenhill/librdkafka">librdkafka</link> &gt;= 0.11.x (most Linux distributions have a package for this library).
+   Version 7.x requires PHP 8.1 or later and <link xlink:href="https://github.com/confluentinc/librdkafka">librdkafka</link> 1.6.0 or later. Version 6.x supports PHP 7 and PHP 8 with librdkafka 0.11 or later. Most Linux distributions have a package for librdkafka.
   </para>
  </section>
 

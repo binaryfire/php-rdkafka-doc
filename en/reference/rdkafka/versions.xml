@@ -20,6 +20,7 @@
  <function name='rdkafka::setloglevel' from='PECL rdkafka &gt;= 0.9.1'/>
  <function name='rdkafka::newtopic' from='PECL rdkafka &gt;= 0.9.1'/>
  <function name='rdkafka::poll' from='PECL rdkafka &gt;= 0.9.1'/>
+ <function name='rdkafka::getmainqueue' from='PECL rdkafka &gt;= 7.0.0'/>
  <function name='rdkafka::flush' from='PECL rdkafka &gt;= 4.0.0, librdkafka &gt;= 0.11.0'/>
  <function name='rdkafka::purge' from='PECL rdkafka &gt;= 4.0.0, librdkafka &gt;= 1.0.0'/>
  <function name='rdkafka::setlogger' from='PECL rdkafka &gt;= 0.9.1'/>
@@ -112,6 +113,10 @@
  <function name='rdkafka\kafkaconsumer::getoffsetpositions' from='PECL rdkafka &gt;= 4.0.0, librdkafka &gt;= 0.9.1'/>
  <function name='rdkafka\kafkaconsumer::offsetsfortimes' from='PECL rdkafka &gt;= 4.0.0, librdkafka &gt;= 0.9.4'/>
  <function name='rdkafka\kafkaconsumer::close' from='PECL rdkafka &gt;= 4.0.0, librdkafka &gt;= 0.9.1'/>
+ <function name='rdkafka\kafkaconsumer::closeasync' from='PECL rdkafka &gt;= 7.0.0, librdkafka &gt;= 1.9.0'/>
+ <function name='rdkafka\kafkaconsumer::isclosed' from='PECL rdkafka &gt;= 7.0.0, librdkafka &gt;= 1.9.0'/>
+ <function name='rdkafka\kafkaconsumer::getconsumerqueue' from='PECL rdkafka &gt;= 7.0.0'/>
+ <function name='rdkafka\kafkaconsumer::splitpartitionqueue' from='PECL rdkafka &gt;= 7.0.0'/>
 
  <function name='rdkafka\message' from='PECL rdkafka &gt;= 0.9.1'/>
  <function name='rdkafka\message::errstr' from='PECL rdkafka &gt;= 0.9.1'/>
@@ -160,6 +165,8 @@
  <function name='rdkafka\queue' from='PECL rdkafka &gt;= 0.9.1'/>
  <function name='rdkafka\queue::__construct' from='PECL rdkafka &gt;= 0.9.1'/>
  <function name='rdkafka\queue::consume' from='PECL rdkafka &gt;= 0.9.1'/>
+ <function name='rdkafka\queue::getlength' from='PECL rdkafka &gt;= 7.0.0'/>
+ <function name='rdkafka\queue::ioeventenable' from='PECL rdkafka &gt;= 7.0.0'/>
 
  <function name='rdkafka\topic' from='PECL rdkafka &gt;= 0.9.1'/>
  <function name='rdkafka\topic::getname' from='PECL rdkafka &gt;= 0.9.1'/>
