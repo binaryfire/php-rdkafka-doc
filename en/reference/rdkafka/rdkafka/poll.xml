@@ -38,6 +38,9 @@
     </listitem>
    </simplelist>
   </para>
+  <para>
+   When a callback throws, poll() returns without calling another callback, and the callback's exception is thrown. Delivery reports and events that were not handled stay queued for the next call. A low level consumer's error callback is the exception: dispatching continues after it throws.
+  </para>
  </refsect1>
 
  <refsect1 role="parameters">

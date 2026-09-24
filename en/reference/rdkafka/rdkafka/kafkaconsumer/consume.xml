@@ -29,6 +29,9 @@
     consumer state.
    </para>
   </note>
+  <para>
+   When a callback throws, consume() returns without handing out another message, and the callback's exception is thrown. Messages and events that were not handed out stay queued for the next call. An error callback set with <function>RdKafka\Conf::setErrorCb</function> is the exception: dispatching continues after it throws.
+  </para>
 
  </refsect1>
 
