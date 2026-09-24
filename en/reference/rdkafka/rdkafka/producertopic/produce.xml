@@ -21,7 +21,10 @@
    Produce and send a single message to broker.
   </para>
   <para>
-   This is async and non-blocking.
+   The message is queued and sent in the background. If the producer queue is full, the call throws an <classname>RdKafka\Exception</classname> with code <constant>RD_KAFKA_RESP_ERR__QUEUE_FULL</constant>, unless <parameter>msgflags</parameter> is <constant>RD_KAFKA_MSG_F_BLOCK</constant>, in which case it waits for space.
+  </para>
+  <para>
+   A message keeps its place in the queue until its delivery has finished and any delivery report for it has been served by <function>RdKafka::poll</function> or <function>RdKafka::flush</function>, which can't happen while this call waits. With <constant>RD_KAFKA_MSG_F_BLOCK</constant>, a full queue can therefore leave the call waiting indefinitely. Use 0 instead, and call <function>RdKafka::poll</function> before retrying when the queue is full.
   </para>
   <note>
    <para>
