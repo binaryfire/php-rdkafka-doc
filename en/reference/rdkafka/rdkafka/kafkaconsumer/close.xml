@@ -20,7 +20,59 @@
    to broker, and left the consumer group.
    The maximum blocking time is roughly limited to session.timeout.ms.
   </para>
+  <para>
+   If <function>RdKafka\KafkaConsumer::closeAsync</function> was called first, <function>RdKafka\KafkaConsumer::close</function> waits for that close to finish instead of starting another one, then releases the consumer.
+  </para>
+  <para>
+   If the rebalance callback throws, or returns without acknowledging the revocation, the consumer releases the partitions itself so that closing can finish. The callback's exception is thrown once the consumer is closed.
+  </para>
+  <para>
+   Once this method starts closing the consumer, the consumer is closed and released when the method returns or throws, and topics and queues obtained from the consumer are invalidated. The method throws without closing anything when it is called from one of the consumer's callbacks, or while another call to <function>RdKafka\KafkaConsumer::close</function> is still running, for example from an error handler.
+  </para>
 
+ </refsect1>
+
+ <refsect1 role="errors">
+  &reftitle.errors;
+  <para>
+   Throws <classname>RdKafka\Exception</classname> with the error returned by librdkafka, for example after a fatal error, once the consumer has been closed and released.
+  </para>
+  <para>
+   Throws <classname>RdKafka\Exception</classname> with code <constant>RD_KAFKA_RESP_ERR__STATE</constant> when called from one of the consumer's callbacks, or while another call to <function>RdKafka\KafkaConsumer::close</function> is still running. From a callback, record that the consumer should close, and close it after the method that invoked the callback returns.
+  </para>
+ </refsect1>
+
+ <refsect1 role="changelog">
+  &reftitle.changelog;
+  <para>
+   <informaltable>
+    <tgroup cols="2">
+     <thead>
+      <row>
+       <entry>&Version;</entry>
+       <entry>&Description;</entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>7.0.0</entry>
+       <entry>
+        Close errors are thrown instead of ignored. Calling this method from a callback throws.
+       </entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </informaltable>
+  </para>
+ </refsect1>
+
+ <refsect1 role="seealso">
+  &reftitle.seealso;
+  <para>
+   <simplelist>
+    <member><function>RdKafka\KafkaConsumer::closeAsync</function></member>
+   </simplelist>
+  </para>
  </refsect1>
 </refentry>
 
