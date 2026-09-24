@@ -77,6 +77,11 @@
     </fieldsynopsis>
     <fieldsynopsis>
      <modifier>public</modifier>
+     <type>array</type>
+     <varname linkend="rdkafka-message.props.headers">headers</varname>
+    </fieldsynopsis>
+    <fieldsynopsis>
+     <modifier>public</modifier>
      <type>string|null</type>
      <varname linkend="rdkafka-message.props.opaque">opaque</varname>
     </fieldsynopsis>
@@ -139,6 +144,12 @@
      <term><varname>offset</varname></term>
      <listitem>
       <para>Offset</para>
+     </listitem>
+    </varlistentry>
+    <varlistentry xml:id="rdkafka-message.props.headers">
+     <term><varname>headers</varname></term>
+     <listitem>
+      <para>Headers, as an array that maps each header name to its value. A repeated name keeps only its last value, and headers without a value have an empty string. <function>RdKafka\Message::getHeaderPairs</function> returns every header.</para>
      </listitem>
     </varlistentry>
     <varlistentry xml:id="rdkafka-message.props.opaque">
