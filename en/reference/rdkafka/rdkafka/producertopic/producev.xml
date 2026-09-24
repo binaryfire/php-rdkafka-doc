@@ -23,7 +23,10 @@
    Produce and send a single message to broker with headers, timestamp.
   </para>
   <para>
-   This is async and non-blocking.
+   The message is queued and sent in the background. If the producer queue is full, the call throws an <classname>RdKafka\Exception</classname> with code <constant>RD_KAFKA_RESP_ERR__QUEUE_FULL</constant>, unless <parameter>msgflags</parameter> is <constant>RD_KAFKA_MSG_F_BLOCK</constant>, in which case it waits for space.
+  </para>
+  <para>
+   A message keeps its place in the queue until its delivery has finished and any delivery report for it has been served by <function>RdKafka::poll</function> or <function>RdKafka::flush</function>, which can't happen while this call waits. With <constant>RD_KAFKA_MSG_F_BLOCK</constant>, a full queue can therefore leave the call waiting indefinitely. Use 0 instead, and call <function>RdKafka::poll</function> before retrying when the queue is full.
   </para>
   <note>
    <para>
@@ -73,7 +76,13 @@
     <term><parameter>headers</parameter></term>
     <listitem>
      <para>
-      Accepts only associative array or null
+      &null; for no headers, an array that maps header names to values, or a list of <literal>[name, value]</literal> pairs. A list whose first element is an array is read as pairs.
+     </para>
+     <para>
+      Map values are converted to strings, with &null; sent as an empty string. Integer keys are sent as their decimal names.
+     </para>
+     <para>
+      Pairs keep their order and can repeat a name. Each pair holds a <type>string</type> name and a <type>string</type> or &null; value. A &null; value sends a header without a value.
      </para>
     </listitem>
    </varlistentry>
@@ -108,6 +117,9 @@
   <simplelist>
    &rdkafka.error.exception;
   </simplelist>
+  <para>
+   Throws an <classname>InvalidArgumentException</classname> if a header pair is not a <type>string</type> name and a <type>string</type> or &null; value. The message is not enqueued.
+  </para>
  </refsect1>
 
  <refsect1 role="changelog">
@@ -122,6 +134,12 @@
       </row>
      </thead>
      <tbody>
+      <row>
+       <entry>7.0.0</entry>
+       <entry>
+        <parameter>headers</parameter> accepts a list of <literal>[name, value]</literal> pairs. Integer keys are sent as their decimal names instead of ending the headers.
+       </entry>
+      </row>
       <row>
        <entry>5.0.0</entry>
        <entry>
@@ -159,6 +177,31 @@ $topic->producev(RD_KAFKA_PARTITION_UA, 0, $payload, $accountId, $headers);
 ]]>
    </programlisting>
   </example>
+  <example>
+   <title>Sending header pairs</title>
+   <programlisting role="php">
+<![CDATA[
+<?php
+$headers = [
+    ['trace', 'first'],
+    ['trace', 'second'],
+    ['optional', null],
+];
+
+$topic->producev(RD_KAFKA_PARTITION_UA, 0, $payload, $accountId, $headers);
+?>
+]]>
+   </programlisting>
+  </example>
+ </refsect1>
+
+ <refsect1 role="seealso">
+  &reftitle.seealso;
+  <para>
+   <simplelist>
+    <member><function>RdKafka\Message::getHeaderPairs</function></member>
+   </simplelist>
+  </para>
  </refsect1>
 
 
