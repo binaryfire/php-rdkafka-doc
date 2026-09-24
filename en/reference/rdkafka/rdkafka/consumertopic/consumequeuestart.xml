@@ -18,6 +18,9 @@
   <para>
    Same as <function>RdKafka\ConsumerTopic::consumeStart</function> but re-routes incoming messages to the provided queue <parameter>queue</parameter>. The application must use one of the <classname>RdKafka\Queue</classname>::consume*() functions to receive fetched messages.
   </para>
+  <para>
+   The queue must be created with <function>RdKafka\Consumer::newQueue</function>. Queues returned by <function>RdKafka::getMainQueue</function>, <function>RdKafka\KafkaConsumer::getConsumerQueue</function> and <function>RdKafka\KafkaConsumer::splitPartitionQueue</function> are rejected with an <classname>InvalidArgumentException</classname>.
+  </para>
 
  </refsect1>
 
