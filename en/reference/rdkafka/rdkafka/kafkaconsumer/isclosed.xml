@@ -17,7 +17,7 @@
    Returns whether librdkafka has finished closing the consumer after <function>RdKafka\KafkaConsumer::closeAsync</function>. It does not mean that the consumer has been released: call <function>RdKafka\KafkaConsumer::close</function> for that.
   </para>
   <para>
-   Once the consumer has closed, calls that need the consumer group fail, and <function>RdKafka\KafkaConsumer::getRebalanceProtocol</function> throws an <classname>RdKafka\Exception</classname>. Topics and queues obtained from the consumer stay valid until <function>RdKafka\KafkaConsumer::close</function>.
+   Once the consumer group has closed, <function>RdKafka\KafkaConsumer::getRebalanceProtocol</function> returns an empty string. Topics and queues obtained from the consumer stay valid until <function>RdKafka\KafkaConsumer::close</function>.
   </para>
   <note>
    <para>
